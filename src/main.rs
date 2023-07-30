@@ -11,8 +11,18 @@ use mvos::println;
 pub extern "C" fn _start() -> ! {
     println!("Hello, World {}", "!");
 
+    mvos::init();
+
+    fn stack() {
+        stack();
+    }
+
+    stack();
+
     #[cfg(test)]
     test_main();
+
+    println!("I did not crash!");
 
     loop {}
 }
