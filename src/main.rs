@@ -13,25 +13,19 @@ pub extern "C" fn _start() -> ! {
 
     mvos::init();
 
-    fn stack() {
-        stack();
-    }
-
-    stack();
 
     #[cfg(test)]
     test_main();
 
-    println!("I did not crash!");
-
-    loop {}
+    println!("it did not crash!");
+    mvos::hlt_loop();
 }
 
 #[cfg(not(test))]
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {
     println!("{}", info);
-    loop {}
+    mvos::hlt_loop()
 }
 
 #[cfg(test)]
